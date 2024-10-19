@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  wp-template
+  wp-template-export-as="index.php"
+  wp-template-define-master-page="true"
+>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -60,6 +65,12 @@
   <body
     class="bg-white font-light text-gray-900 dark:bg-gray-950 dark:text-gray-50"
   >
+    <script
+      type="module"
+      src="https://unpkg.com/@11ty/is-land@4.0.0/is-land.js"
+      data-pg-name="Pt-11ty-App"
+      wp-no-enqueue
+    ></script>
     <header class="bg-secondary-500">
       <div class="container mx-auto">
         <nav class="flex flex-wrap items-center p-4">
@@ -84,60 +95,69 @@
               >Happy Plants</span
             ></a
           >
-          <script
-            type="module"
-            data-pg-name="Pt-App-Dark-Mode_App"
-            id="dark-mode-app"
+          <is-land
+            data-pg-name="Pt-11ty-Island"
+            on:media="screen and (min-width: 1024px)"
+            class="hidden lg:block"
           >
-            import { createApp } from "https://unpkg.com/petite-vue?module";
+            <template data-island>
+              <script
+                type="module"
+                data-pg-name="Pt-App-Dark-Mode_App"
+                id="dark-mode-app"
+                wp-no-enqueue
+              >
+                import { createApp } from "./wp-content/themes/happy-plants/modules/petite-vue-0.2.2.js";
+                const state = {
+                  // state exposed to all expressions within v-scope regions
+                  darkMode: isInitiallyDarkMode,
+                  // methods
+                  isDarkMode() {
+                    return (
+                      localStorage.getItem("vueuse-color-scheme") === "dark" ||
+                      (!localStorage.getItem("vueuse-color-scheme") &&
+                        window.matchMedia("(prefers-color-scheme: dark)")
+                          .matches)
+                    );
+                  },
+                  initDarkMode() {
+                    this.darkMode = this.isDarkMode();
+                  },
+                  applyDarkMode() {
+                    if (this.darkMode !== null) {
+                      localStorage.setItem(
+                        "vueuse-color-scheme",
+                        this.darkMode ? "dark" : "light"
+                      );
+                      document.documentElement.classList.toggle(
+                        "dark",
+                        this.darkMode
+                      );
+                    }
+                  },
+                };
 
-            const state = {
-              // state exposed to all expressions within v-scope regions
-              darkMode: isInitiallyDarkMode,
-              // methods
-              isDarkMode() {
-                return (
-                  localStorage.getItem("vueuse-color-scheme") === "dark" ||
-                  (!localStorage.getItem("vueuse-color-scheme") &&
-                    window.matchMedia("(prefers-color-scheme: dark)").matches)
-                );
-              },
-              initDarkMode() {
-                this.darkMode = this.isDarkMode();
-              },
-              applyDarkMode() {
-                if (this.darkMode !== null) {
-                  localStorage.setItem(
-                    "vueuse-color-scheme",
-                    this.darkMode ? "dark" : "light"
-                  );
-                  document.documentElement.classList.toggle(
-                    "dark",
-                    this.darkMode
-                  );
-                }
-              },
-            };
-
-            createApp(state).mount("#dark-mode");
-          </script>
-          <label
-            class="cursor-pointer inline-flex items-center mr-4"
-            data-pg-name="Pt-Island-Dark-Mode"
-            id="dark-mode"
-            v-scope="{}"
-          >
-            <input
-              type="checkbox"
-              value=""
-              class="sr-only peer"
-              v-model="darkMode"
-              v-on:vue:mounted="initDarkMode()"
-              v-effect="darkMode, applyDarkMode()"
-            /><span
-              class="bg-gray-200 h-6 peer relative rounded-full w-11 after:absolute after:bg-white after:border after:border-gray-300 after:h-5 after:rounded-full after:transition-all after:w-5 dark:bg-gray-700 dark:border-gray-600 dark:peer-focus:ring-primary-800 peer-checked:after:border-white peer-checked:after:translate-x-full peer-checked:bg-primary-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-secondary-300 rtl:peer-checked:after:-translate-x-full after:content-[''] after:start-[2px] after:top-[2px]"
-            ></span>
-          </label>
+                createApp(state).mount("#dark-mode");
+              </script>
+            </template>
+            <label
+              class="cursor-pointer inline-flex items-center mr-4"
+              data-pg-name="Pt-Island-Dark-Mode"
+              id="dark-mode"
+              v-scope="{}"
+            >
+              <input
+                type="checkbox"
+                value=""
+                class="sr-only peer"
+                v-model="darkMode"
+                v-on:vue:mounted="initDarkMode()"
+                v-effect="darkMode, applyDarkMode()"
+              /><span
+                class="after:absolute after:bg-white after:border after:border-gray-300 after:content-[''] after:h-5 after:rounded-full after:start-[2px] after:top-[2px] after:transition-all after:w-5 bg-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:peer-focus:ring-primary-800 h-6 peer peer-checked:after:border-white peer-checked:after:translate-x-full peer-checked:bg-primary-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-secondary-300 relative rounded-full rtl:peer-checked:after:-translate-x-full w-11"
+              ></span>
+            </label>
+          </is-land>
           <button
             class="hover:bg-primary-600 hover:text-white px-3 py-2 rounded text-primary-600 lg:hidden"
             data-name="nav-toggler"
@@ -1300,60 +1320,69 @@
           <div
             class="-mx-4 flex flex-wrap items-center min-h-28 space-y-10 text-center lg:space-y-0"
           >
-            <script type="module" data-pg-name="Pt-App-Weather-Card">
-              import { createApp } from "https://unpkg.com/petite-vue?module";
+            <is-land data-pg-name="Pt-11ty-Island" on:visible>
+              <template data-island>
+                <script
+                  type="module"
+                  data-pg-name="Pt-App-Weather-Card"
+                  wp-no-enqueue
+                >
+                  import { createApp } from "./wp-content/themes/happy-plants/modules/petite-vue-0.2.2.js";
 
-              createApp({
-                weather: null,
-                loading: true,
-                error: "",
-                getLocation() {
-                  navigator.geolocation.getCurrentPosition(
-                    async (pos) =>
-                      await this.fetchWeather(
-                        pos.coords.latitude,
-                        pos.coords.longitude
-                      ),
-                    async () => await this.fetchWeather(-37.70433, 144.7254891) // Fallback coordinates
-                  );
-                },
-                async fetchWeather(lat, lon) {
-                  try {
-                    const response = await fetch(
-                      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b6cd22634f8f1c9a74704828f7f0523e&units=imperial`
-                    );
-                    if (!response.ok)
-                      throw new Error("Failed to fetch weather data");
-                    this.weather = await response.json();
-                  } catch (err) {
-                    this.error = err.message;
-                  } finally {
-                    this.loading = false;
-                  }
-                },
-              }).mount("#weather");
-            </script>
-            <div
-              v-scope="{}"
-              id="weather"
-              v-on:vue:mounted="getLocation()"
-              data-pg-name="Pt-Island-Weather-Card"
-              class="text-white w-full"
-            >
-              <template v-if="loading">
-                <p>Loading weather data...</p>
+                  createApp({
+                    weather: null,
+                    loading: true,
+                    error: "",
+                    getLocation() {
+                      navigator.geolocation.getCurrentPosition(
+                        async (pos) =>
+                          await this.fetchWeather(
+                            pos.coords.latitude,
+                            pos.coords.longitude
+                          ),
+                        async () =>
+                          await this.fetchWeather(-37.70433, 144.7254891) // Fallback coordinates
+                      );
+                    },
+                    async fetchWeather(lat, lon) {
+                      try {
+                        const response = await fetch(
+                          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b6cd22634f8f1c9a74704828f7f0523e&units=imperial`
+                        );
+                        if (!response.ok)
+                          throw new Error("Failed to fetch weather data");
+                        this.weather = await response.json();
+                      } catch (err) {
+                        this.error = err.message;
+                      } finally {
+                        this.loading = false;
+                      }
+                    },
+                  }).mount("#weather");
+                </script>
               </template>
-              <template v-else-if="error">
-                <p>Error: {{ error }}</p>
-              </template>
-              <template v-else>
-                <div class="flex flex-col justify-center w-full">
-                  <p>Location: {{ weather.name }}</p>
-                  <p>Weather: {{ weather.weather[0].description }}</p>
-                  <p>Temperature: {{ weather.main.temp }}°F</p>
-                </div>
-              </template>
-            </div>
+              <div
+                v-scope="{}"
+                id="weather"
+                v-on:vue:mounted="getLocation()"
+                data-pg-name="Pt-Island-Weather-Card"
+                class="text-white w-full"
+              >
+                <template v-if="loading">
+                  <p>Loading weather data...</p>
+                </template>
+                <template v-else-if="error">
+                  <p>Error: {{ error }}</p>
+                </template>
+                <template v-else>
+                  <div class="flex flex-col justify-center w-full">
+                    <p>Location: {{ weather.name }}</p>
+                    <p>Weather: {{ weather.weather[0].description }}</p>
+                    <p>Temperature: {{ weather.main.temp }}°F</p>
+                  </div>
+                </template>
+              </div>
+            </is-land>
           </div>
         </div>
       </section>
@@ -1538,8 +1567,11 @@
               </p>
             </div>
             <div class="px-4 py-2 w-full sm:w-auto">
-              <a href="#" class="hover:text-primary-300">Privacy Policy</a> |
-              <a href="#" class="hover:text-primary-300">Terms of Use</a>
+              <a href="#" class="hover:text-primary-300">Privacy Policy</a> |<a
+                href="#"
+                class="hover:text-primary-300"
+                >Terms of Use</a
+              >
             </div>
           </div>
         </div>
