@@ -152,68 +152,71 @@ if ( ! function_exists( 'happy_plants_enqueue_scripts' ) ) :
 
         /* Pinegrow generated Enqueue Scripts Begin */
 
-    wp_register_script( 'inline-script-1', '', [], '1.0.21', false );
+    wp_register_script( 'inline-script-1', '', [], '1.0.37', false );
     wp_enqueue_script( 'inline-script-1' );
-    wp_add_inline_script( 'inline-script-1', '/* Pinegrow Interactions, do not remove */ (function () {
+    wp_add_inline_script( 'inline-script-1', '/* Pinegrow Interactions, do not remove */ ;(function () {
         try {
-          if (!document.documentElement.hasAttribute("data-pg-ia-disabled")) {
+          if (!document.documentElement.hasAttribute(\'data-pg-ia-disabled\')) {
             window.pgia_small_mq =
-              typeof pgia_small_mq == "string"
+              typeof pgia_small_mq == \'string\'
                 ? pgia_small_mq
-                : "(max-width:767px)";
+                : \'(max-width:767px)\'
             window.pgia_large_mq =
-              typeof pgia_large_mq == "string"
+              typeof pgia_large_mq == \'string\'
                 ? pgia_large_mq
-                : "(min-width:768px)";
-            var style = document.createElement("style");
+                : \'(min-width:768px)\'
+            var style = document.createElement(\'style\')
             var pgcss =
-              \'html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}\';
+              \'html:not(.pg-ia-no-preview) [data-pg-ia-hide=""] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show=""] {opacity:1;visibility:visible;display:block;}\'
             if (
-              document.documentElement.hasAttribute("data-pg-id") &&
-              document.documentElement.hasAttribute("data-pg-mobile")
+              document.documentElement.hasAttribute(\'data-pg-id\') &&
+              document.documentElement.hasAttribute(\'data-pg-mobile\')
             ) {
-              pgia_small_mq = "(min-width:0)";
-              pgia_large_mq = "(min-width:99999px)";
+              pgia_small_mq = \'(min-width:0)\'
+              pgia_large_mq = \'(min-width:99999px)\'
             }
             pgcss +=
-              "@media " +
+              \'@media \' +
               pgia_small_mq +
-              \'{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}\';
+              \'{ html:not(.pg-ia-no-preview) [data-pg-ia-hide="mobile"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="mobile"] {opacity:1;visibility:visible;display:block;}}\'
             pgcss +=
-              "@media " +
+              \'@media \' +
               pgia_large_mq +
-              \'{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}\';
-            style.innerHTML = pgcss;
-            document.querySelector("head").appendChild(style);
+              \'{html:not(.pg-ia-no-preview) [data-pg-ia-hide="desktop"] {opacity:0;visibility:hidden;}html:not(.pg-ia-no-preview) [data-pg-ia-show="desktop"] {opacity:1;visibility:visible;display:block;}}\'
+            style.innerHTML = pgcss
+            document.querySelector(\'head\').appendChild(style)
           }
         } catch (e) {
-          console && console.log(e);
+          console && console.log(e)
         }
-      })();');
+      })()');
 
-    wp_register_script( 'inline-script-2', '', [], '1.0.21', false );
+    wp_register_script( 'inline-script-2', '', [], '1.0.37', false );
     wp_enqueue_script( 'inline-script-2' );
-    wp_add_inline_script( 'inline-script-2', 'const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
-      const setting = localStorage.getItem("vueuse-color-scheme") || "auto";
-      const isInitiallyDarkMode = !!(
-        setting === "dark" ||
-        (prefersDark && setting !== "light")
-      );
+    wp_add_inline_script( 'inline-script-2', 'const prefersDark = matchMedia(\'(prefers-color-scheme: dark)\').matches
+      const setting = localStorage.getItem(\'vueuse-color-scheme\') || \'auto\'
+      var isInitiallyDarkMode = !!(
+        setting === \'dark\' ||
+        (prefersDark && setting !== \'light\')
+      )
       if (isInitiallyDarkMode)
-        document.documentElement.classList.toggle("dark", true);');
+        document.documentElement.classList.toggle(\'dark\', true)');
 
     wp_deregister_script( 'happy_plants-pgia' );
-    wp_enqueue_script( 'happy_plants-pgia', get_template_directory_uri() . '/pgia/lib/pgia.js', [], '1.0.21', true);
+    wp_enqueue_script( 'happy_plants-pgia', get_template_directory_uri() . '/pgia/lib/pgia.js', [], '1.0.37', false);
+
+    wp_deregister_script( 'happy_plants-flowbite' );
+    wp_enqueue_script( 'happy_plants-flowbite', 'https://cdn.jsdelivr.net/npm/flowbite@2.x/dist/flowbite.min.js', [], '1.0.37', true);
 
     /* Pinegrow generated Enqueue Scripts End */
 
         /* Pinegrow generated Enqueue Styles Begin */
 
     wp_deregister_style( 'happy_plants-tailwind' );
-    wp_enqueue_style( 'happy_plants-tailwind', get_template_directory_uri() . '/tailwind_theme/tailwind.css', [], '1.0.21', 'all');
+    wp_enqueue_style( 'happy_plants-tailwind', get_template_directory_uri() . '/tailwind_theme/tailwind.css', [], '1.0.37', 'all');
 
     wp_deregister_style( 'happy_plants-style' );
-    wp_enqueue_style( 'happy_plants-style', get_bloginfo('stylesheet_url'), [], '1.0.21', 'all');
+    wp_enqueue_style( 'happy_plants-style', get_bloginfo('stylesheet_url'), [], '1.0.37', 'all');
 
     /* Pinegrow generated Enqueue Styles End */
 
