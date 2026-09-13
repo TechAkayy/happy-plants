@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "alpinejs-ssr": "^1.0.1"
+  }
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <!-- Bootstrap core CSS -->
+        <link href="bootstrap_theme/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="blocks.css"/>
+        <link href="style.css" rel="stylesheet"/>
+        <title>Design of the Week Template 3 - Pinegrow Web Editor</title>
+        <!-- <script src="https://unpkg.com/petite-vue" defer init></script> -->
+    </head>
+    <body class="text-muted">
+        <!-- <div data-pg-name="BaseButton">
+      <script type="module">
+        import {createApp} from 'https://unpkg.com/petite-vue?module'
+
+        function BaseButton(props) {
+          return {
+            $template: '#base-button',
+            label: props.label,
+            color: props.color,
+            status: '',
+            showStatus() {
+              this.status = `${this.label} button was clicked!`
+              setTimeout(() => (this.status = ''), 1000)
+            },
+          }
+        }
+
+        createApp({
+          BaseButton,
+        }).mount()
+      </script>
+      <template id="base-button">
+        <button @click="showStatus" :style="{ 'background-color': color }">
+          {{label}}
+        </button>
+        <span style="margin-left: 4px"> {{status}}</span>
+      </template>
+    </div>
+    <div v-scope="BaseButton({ label: 'Button-1', color: 'green' })"></div>
+    <div
+      style="margin-top: 8px"
+      v-scope="BaseButton({ label: 'Button-2', color: 'red' })"></div> -->
+        <main>
+            <div data-pg-name="Counter" class="d-none">
+                <script type="module" src="./script1.js"></script>
+                <div id="app1">
+                    <p>{{ count }}</p>
+                    <p>{{ plusOne }}</p>
+                    <button @click="inc">Increment</button>
+                </div>
+            </div>
+            <div data-pg-name="Counter" class="d-none">
+                <script type="module" src="./script2.js"></script>
+                <div id="app2">
+                    <p>{{ count }}</p>
+                    <p>{{ plusOne }}</p>
+                    <button @click="inc">Increment</button>
+                </div>
+            </div>
+            <!-- anywhere on the page -->
+            <!-- <div v-scope="{ count: 0 }">
+        {{ count }}
+        <button @click="count++">inc</button>
+      </div> -->
+            <!-- <script type="module">
+        import {createApp, reactive} from 'https://unpkg.com/petite-vue?module'
+
+        const store = reactive({
+          // exposed to all expressions
+          count: 0,
+          // getters
+          get plusOne() {
+            return this.count + 1
+          },
+          // methods
+          inc() {
+            this.count++
+          },
+        })
+
+        createApp({store}).mount()
+      </script> -->
+            <!-- v-scope value can be omitted -->
+            <!-- <div v-scope="{ localCount: 0 }">
+        <span>Local {{ localCount }}</span>
+        <button @click="localCount++">increment</button>
+      </div>
+
+      <div v-scope="{ count: 0 }">
+        <span v-effect="$el.textContent = count"></span>
+        <button @click="count++">increment</button>
+      </div> -->
+            <script type="module">
+            import {createApp} from 'https://unpkg.com/petite-vue?module'
+
+        createApp().mount('div#app3')
+        </script>
+            <div id="app3" v-scope="{ message: 'A Fresh Start!' }" v-effect="message = 'A Good Day!'">
+                {{message}}
+</div>
+            <!-- reuse it -->
+            <section class="bg-secondary hero-block pb-5 position-relative text-white">
+                <div class="container pb-5 pt-5">
+                    <div class="align-items-center gx-lg-5 gy-4 row">
+                        <div class="col-lg-6">
+                            <div class="position-relative poster" style="height: 50vh"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <h1 class="display-3 fw-bold mb-3">
+                            Happy Plants, Healthy Homes </h1>
+                            <p class="lead mb-4 pe-sm-5">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Phasellus pulvinar faucibus neque, nec rhoncus nunc ultrices sit
+                            amet. </p>
+                            <a href="#" class="btn btn-primary pb-3 pe-4 ps-4 pt-3" target="_pg_blank">Start Today</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>
